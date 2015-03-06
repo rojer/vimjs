@@ -1,5 +1,26 @@
-# VimJS - a JavaScript helper script for Vim.
+# VimJS - a JavaScript helper plugin for Vim
 
-VimJS parses .js files and adds scope-aware variable highlighting and basic refactoring (just renaming a varible for now).
+VimJS parses .js files and adds scope-aware identifier highlighting, basic refactoring (renaming a variable/function) and navigation.
 
-VimJS uses a JavaScript parser from the [slimit JS minifier](https://github.com/rspivak/slimit) (you'll need [my patched version](https://github.com/rojer/slimit)).
+VimJS uses a [slightly modified](https://github.com/rojer/slimit) parser from the [slimit JS minifier](https://github.com/rspivak/slimit).
+
+## Installation
+
+* Fetch the [Vimball archive](https://raw.githubusercontent.com/rojer/vimjs/master/vimjs.vmb)
+* Open it in Vim
+* :source %
+
+You should see output from Vimball about installed files and from now on, the plugin will be loaded whenever a .js file is opened.
+
+Because parsing can be somewhat slow, especially on larger files, it starts disabled by default and needs to be enabled .
+
+Key bindings:
+
+* Ctrl-E + E - enable/disable the plugin.
+
+When plugin is enabled, placing the cursor within an identifier (variable or function name) will highlight other references to it.
+At this time, the following additional functions become available:
+
+* Ctrl-E + R          - rename the variable/function
+* Ctrl-E + Left/Up    - jump the previous occurence of the identifier
+* Ctrl-E + Right/Down - jump the next occurence of the identifier
