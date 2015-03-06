@@ -2,6 +2,8 @@
 "
 " Licensed under Apache License, Version 2.0.
 " See the accompanying LICENSE file.
+"
+" https://github.com/rojer/vimjs
 
 if !has('python')
   echo "Error: Required vim compiled with +python"
@@ -37,8 +39,10 @@ fu! s:HighlightJSInit()
   noremap <silent> <C-e><Down>  :call <SID>HighlightNextJSVar()<CR>
 
   python <<EOF
-import sys
-sys.path.append('/home/rojer/vimjs/slimit/src')
+import vim
+
+# import sys
+# sys.path.append('/home/rojer/vimjs/slimit/src')
 
 from slimit import ast
 from slimit import scope
@@ -46,11 +50,10 @@ from slimit import parser
 from slimit.visitors import nodevisitor
 from slimit.visitors import scopevisitor
 
-import vim
-
 # buffer name -> State
 buffer_state = {}
-enabled = True
+enabled = False
+
 
 class State(object):
   def __init__(self):
@@ -89,6 +92,7 @@ def _GetState():
 
 def MaybeParse():
   if not enabled: return
+  if not vim.current.buffer.name.endswith('.js'): return
   state = _GetState()
   if state.parse_seq == _GetUndoSeq():
     return
@@ -105,7 +109,7 @@ def _Parse():
   try:
     tree = p.parse('\n'.join(vim.current.buffer))
   except SyntaxError, e:
-    print 'bad syntax:', str(e), dir(e)
+    print 'bad syntax:', str(e)
     return state
 
   sym_table = scope.SymbolTable()
@@ -246,8 +250,6 @@ def RenameVar():
     print '%d replacements made.' % num_replaced
     MaybeParse()
     _PointCursorAtNode(state.cur_hl_node)
-
-print 'VimJS loaded'
 
 MaybeParse()
 
