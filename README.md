@@ -12,7 +12,9 @@ VimJS uses a [slightly modified](https://github.com/rojer/slimit) parser from th
 
 You should see output from Vimball about installed files and from now on, the plugin will be loaded whenever a .js file is opened.
 
-Because parsing can be somewhat slow, especially on larger files, it starts disabled by default and needs to be enabled .
+Note: Because parsing can be somewhat slow, especially on larger files, it starts disabled by default and needs to be enabled .
+
+Short video, demonstrating installation and basic use: http://youtu.be/xLrv2rF9Gpg
 
 Key bindings:
 
