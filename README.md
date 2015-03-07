@@ -15,6 +15,7 @@ You should see output from Vimball about installed files and from now on, the pl
 Note: Because parsing can be somewhat slow, especially on larger files, it starts disabled by default and needs to be enabled .
 
 Short video, demonstrating installation and basic use: http://youtu.be/xLrv2rF9Gpg
+Slightly longer (2 minute) editing session: http://youtu.be/WjKxtT1kJ6k
 
 Key bindings:
 
