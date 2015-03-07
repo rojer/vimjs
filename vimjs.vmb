@@ -2,7 +2,7 @@
 UseVimball
 finish
 ftplugin/javascript_vimjs.vim	[[[1
-322
+323
 " Copyright 2015 Deomid 'rojer' Ryabkov
 "
 " Licensed under Apache License, Version 2.0.
@@ -31,6 +31,7 @@ fu! s:HighlightJSInit()
     autocmd!
       au BufReadPost   *.js call <SID>ParseJS()
       au BufWritePost  *.js call <SID>ParseJS()
+      au InsertLeave   *.js call <SID>ParseJS()
       au CursorMoved   *.js call <SID>HighlightJS()
       au CursorMovedI  *.js call <SID>HighlightJS()
   augroup END

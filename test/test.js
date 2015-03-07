@@ -6,6 +6,7 @@ function asd() {
   var q1 = oops = 0;
   foo = 12;
   implicitGlobal = 11; implicitGlobal = 22;
+  q1 = 2;
   function cc() {
     X++;
     c++;

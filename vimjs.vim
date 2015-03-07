@@ -26,6 +26,7 @@ fu! s:HighlightJSInit()
     autocmd!
       au BufReadPost   *.js call <SID>ParseJS()
       au BufWritePost  *.js call <SID>ParseJS()
+      au InsertLeave   *.js call <SID>ParseJS()
       au CursorMoved   *.js call <SID>HighlightJS()
       au CursorMovedI  *.js call <SID>HighlightJS()
   augroup END
