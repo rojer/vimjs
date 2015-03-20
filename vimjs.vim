@@ -73,13 +73,14 @@ class State(object):
 
 # TODO(rojer): This should come from some standard JS library function list.
 OK_GLOBALS = frozenset([
-  'window', 'document', 'navigator',
-  'JSON', 'Math', 'XMLHttpRequest',
+  'top', 'window', 'location', 'external', 'chrome', 'document',
+  'navigator',
+  'JSON', 'Math', 'XMLHttpRequest', 'RegExp',
   'chrome', 'console',
   'localStorage',
   '$',  # jQuery object.
   'Array', 'atob', 'Blob', 'Uint8Array', 'setTimeout', 'encodeURIComponent',
-  'parseInt', 'clearTimeout', 'encodeURI',
+  'parseInt', 'clearTimeout', 'encodeURI', 'clearInterval', 'setInterval'
 ]);
 
 
