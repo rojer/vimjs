@@ -13,5 +13,6 @@ python2/slimit/scope.py
 python2/slimit/unicode_chars.py
 python2/slimit/yacctab.py
 python2/slimit/visitors/__init__.py
+python2/slimit/visitors/ecmavisitor.py
 python2/slimit/visitors/nodevisitor.py
 python2/slimit/visitors/scopevisitor.py

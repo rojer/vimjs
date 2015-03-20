@@ -31,8 +31,10 @@ fu! s:HighlightJSInit()
       au CursorMovedI  *.js call <SID>HighlightJS()
   augroup END
   
-  noremap <silent> <C-e>e       :call <SID>ToggleHighlightJS()<CR>
-  noremap <silent> <C-e>r       :call <SID>RenameJSVar()<CR>
+  noremap  <silent> <C-e>e       :call <SID>ToggleHighlightJS()<CR>
+  noremap  <silent> <C-e>r       :call <SID>RenameJSVar()<CR>
+  noremap  <silent> <C-e>f       :call <SID>FormatJS()<CR>
+  vnoremap <silent> <C-e>f       :<C-U>call <SID>FormatSelectedJS()<CR>
 
   noremap <silent> <C-e><Left>  :call <SID>HighlightPreviousJSVar()<CR>
   noremap <silent> <C-e><Up>    :call <SID>HighlightPreviousJSVar()<CR>
@@ -48,6 +50,7 @@ import vim
 from slimit import ast
 from slimit import scope
 from slimit import parser
+from slimit.visitors import ecmavisitor
 from slimit.visitors import nodevisitor
 from slimit.visitors import scopevisitor
 
@@ -252,6 +255,21 @@ def RenameVar():
     MaybeParse()
     _PointCursorAtNode(state.cur_hl_node)
 
+
+def Format(input_js):
+  if not input_js:
+    print "nothing selected"
+    return
+  p = parser.Parser()
+  try:
+    tree = p.parse(input_js)
+  except SyntaxError, e:
+    print "JS parse error:", str(e)
+    return
+  formatted_js = ecmavisitor.ECMAVisitor().visit(tree) + "\n"
+  return formatted_js
+
+
 MaybeParse()
 
 EOF
@@ -285,6 +303,25 @@ endfu
 fu! s:RenameJSVar()
   python <<EOF
 RenameVar()
+EOF
+endfu
+
+fu! s:FormatJS()
+python <<EOF
+formatted_js = Format('\n'.join(vim.current.buffer))
+if formatted_js is not None:
+  vim.current.buffer[:] = formatted_js.splitlines()
+EOF
+endfu
+
+fu! s:FormatSelectedJS()
+  normal gv"xy
+python <<EOF
+formatted_js = Format(vim.eval('@x'))
+if formatted_js is not None:
+  vim.command("let @x = '%s'" % formatted_js.replace(r"'", r"\'"))
+  vim.command(r'normal gvd')
+  vim.command(r'normal "xP')
 EOF
 endfu
 

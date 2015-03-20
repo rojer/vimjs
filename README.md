@@ -24,6 +24,7 @@ Key bindings:
 When plugin is enabled, placing the cursor within an identifier (variable or function name) will highlight other references to it.
 At this time, the following additional functions become available:
 
+* Ctrl-E + F          - re-format buffer according to ECMA recommendations, also works on visually selected regions. 
 * Ctrl-E + R          - rename the variable/function
 * Ctrl-E + Left/Up    - jump the previous occurence of the identifier
 * Ctrl-E + Right/Down - jump the next occurence of the identifier
